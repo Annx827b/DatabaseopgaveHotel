@@ -310,12 +310,12 @@ namespace DatabaseopgaveHotel
             SqlCommand command = new SqlCommand(queryStringAllFacilitys, connection);
             SqlDataReader reader = command.ExecuteReader();
 
-            Console.WriteLine("Listing all Facilitys:");
+            Console.WriteLine("Listing all Facilitys in Database:");
 
             if (!reader.HasRows)
             {
                 
-                Console.WriteLine("No Facilitys in database");
+                Console.WriteLine("No Facilitys were found in the database");
                 reader.Close();
 
                 
@@ -364,7 +364,7 @@ namespace DatabaseopgaveHotel
            
             if (!reader.HasRows)
             { 
-                Console.WriteLine("No Facilitys in database");
+                Console.WriteLine("No Facilities were found in the database");
                 reader.Close();
 
                 return null;

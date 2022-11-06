@@ -9,7 +9,6 @@ namespace DatabaseopgaveHotel
 {
     class DBClient
     {
-        //Database connection string - replace it with the connnection string to your own database 
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Hotel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
        
         #region Hotel
@@ -260,31 +259,31 @@ namespace DatabaseopgaveHotel
         {
             Console.WriteLine("Calling -> GetMaxFacilityNo");
 
-            //This SQL command will fetch one row from the DemoFacility table: The one with the max Facility_No
+            
             string queryStringMaxFacilityNo = "SELECT  MAX(Facility_No)  FROM DemoFacility";
             Console.WriteLine($"SQL applied: {queryStringMaxFacilityNo}");
 
-            //Apply SQL command
+           
             SqlCommand command = new SqlCommand(queryStringMaxFacilityNo, connection);
             SqlDataReader reader = command.ExecuteReader();
 
-            //Assume undefined value 0 for max Facility_no
+           
             int MaxFacility_No = 0;
 
-            //Is there any rows in the query
+            
             if (reader.Read())
             {
-                //Yes, get max Facility_no
-                MaxFacility_No = reader.GetInt32(0); //Reading int fro 1st column
+               
+                MaxFacility_No = reader.GetInt32(0); 
             }
 
-            //Close reader
+           
             reader.Close();
 
             Console.WriteLine($"Max Facility#: {MaxFacility_No}");
             Console.WriteLine();
 
-            //Return max Facility_no
+           
             return MaxFacility_No;
         }
 
@@ -292,11 +291,11 @@ namespace DatabaseopgaveHotel
         {
             Console.WriteLine("Calling -> DeleteFacility");
 
-            //This SQL command will delete one row from the DemoFacility table: The one with primary key Facility_No
+            
             string deleteCommandString = $"DELETE FROM DemoFacility  WHERE Facility_No = {Facility_no}";
             Console.WriteLine($"SQL applied: {deleteCommandString}");
 
-            //Apply SQL command
+            
             SqlCommand command = new SqlCommand(deleteCommandString, connection);
             Console.WriteLine($"Deleting Facility #{Facility_no}");
             int numberOfRowsAffected = command.ExecuteNonQuery();
@@ -304,7 +303,7 @@ namespace DatabaseopgaveHotel
             Console.WriteLine($"Number of rows affected: {numberOfRowsAffected}");
             Console.WriteLine();
 
-            //Return number of rows affected
+            
             return numberOfRowsAffected;
         }
 
@@ -312,11 +311,11 @@ namespace DatabaseopgaveHotel
         {
             Console.WriteLine("Calling -> UpdateFacility");
 
-            //This SQL command will update one row from the DemoFacility table: The one with primary key Facility_No
+            
             string updateCommandString = $"UPDATE DemoFacility SET Name='{Facility.Name}' WHERE Facility_No = {Facility.Facility_No}";
             Console.WriteLine($"SQL applied: {updateCommandString}");
 
-            //Apply SQL command
+            
             SqlCommand command = new SqlCommand(updateCommandString, connection);
             Console.WriteLine($"Updating Facility #{Facility.Facility_No}");
             int numberOfRowsAffected = command.ExecuteNonQuery();
@@ -324,7 +323,7 @@ namespace DatabaseopgaveHotel
             Console.WriteLine($"Number of rows affected: {numberOfRowsAffected}");
             Console.WriteLine();
 
-            //Return number of rows affected
+           
             return numberOfRowsAffected;
         }
 
@@ -332,11 +331,10 @@ namespace DatabaseopgaveHotel
         {
             Console.WriteLine("Calling -> InsertFacility");
 
-            //This SQL command will insert one row into the DemoFacility table with primary key Facility_No
+            
             string insertCommandString = $"INSERT INTO DemoFacility VALUES({Facility.Facility_No}, '{Facility.Name}')";
             Console.WriteLine($"SQL applied: {insertCommandString}");
 
-            //Apply SQL command
             SqlCommand command = new SqlCommand(insertCommandString, connection);
 
             Console.WriteLine($"Creating Facility #{Facility.Facility_No}");
@@ -345,7 +343,6 @@ namespace DatabaseopgaveHotel
             Console.WriteLine($"Number of rows affected: {numberOfRowsAffected}");
             Console.WriteLine();
 
-            //Return number of rows affected 
             return numberOfRowsAffected;
         }
 
@@ -353,49 +350,48 @@ namespace DatabaseopgaveHotel
         {
             Console.WriteLine("Calling -> ListAllFacilitys");
 
-            //This SQL command will fetch all rows and columns from the DemoFacility table
+            
             string queryStringAllFacilitys = "SELECT * FROM DemoFacility";
             Console.WriteLine($"SQL applied: {queryStringAllFacilitys}");
 
-            //Apply SQL command
+           
             SqlCommand command = new SqlCommand(queryStringAllFacilitys, connection);
             SqlDataReader reader = command.ExecuteReader();
 
             Console.WriteLine("Listing all Facilitys:");
 
-            //NO rows in the query 
             if (!reader.HasRows)
             {
-                //End here
+                
                 Console.WriteLine("No Facilitys in database");
                 reader.Close();
 
-                //Return null for 'no Facilitys found'
+                
                 return null;
             }
 
-            //Create list of Facilitys found
+          
             List<Facility> Facilitys = new List<Facility>();
             while (reader.Read())
             {
-                //If we reached here, there is still one Facility to be put into the list 
+                
                 Facility nextFacility = new Facility()
                 {
-                    Facility_No = reader.GetInt32(0), //Reading int from 1st column
-                    Name = reader.GetString(1),    //Reading string from 2nd column
+                    Facility_No = reader.GetInt32(0), 
+                    Name = reader.GetString(1),    
                 };
 
-                //Add Facility to list
+               
                 Facilitys.Add(nextFacility);
 
                 Console.WriteLine(nextFacility);
             }
 
-            //Close reader
+       
             reader.Close();
             Console.WriteLine();
 
-            //Return list of Facilitys
+            
             return Facilitys;
         }
 
@@ -403,91 +399,67 @@ namespace DatabaseopgaveHotel
         {
             Console.WriteLine("Calling -> GetFacility");
 
-            //This SQL command will fetch the row with primary key Facility_no from the DemoFacility table
+          
             string queryStringOneFacility = $"SELECT * FROM DemoFacility WHERE Facility_no = {Facility_no}";
             Console.WriteLine($"SQL applied: {queryStringOneFacility}");
 
-            //Prepare SQK command
+           
             SqlCommand command = new SqlCommand(queryStringOneFacility, connection);
             SqlDataReader reader = command.ExecuteReader();
 
             Console.WriteLine($"Finding Facility#: {Facility_no}");
 
-            //NO rows in the query? 
+           
             if (!reader.HasRows)
-            {
-                //End here
+            { 
                 Console.WriteLine("No Facilitys in database");
                 reader.Close();
 
-                //Return null for 'no Facility found'
                 return null;
             }
 
-            //Fetch Facility object from teh database
+            
             Facility Facility = null;
             if (reader.Read())
             {
                 Facility = new Facility()
                 {
-                    Facility_No = reader.GetInt32(0), //Reading int fro 1st column
-                    Name = reader.GetString(1),    //Reading string from 2nd column
+                    Facility_No = reader.GetInt32(0), 
+                    Name = reader.GetString(1),  
                 };
 
                 Console.WriteLine(Facility);
             }
 
-            //Close reader
             reader.Close();
             Console.WriteLine();
 
-            //Return found Facility
+           
             return Facility;
         }
         public void StartFacility()
         {
-            //Apply 'using' to connection (SqlConnection) in order to call Dispose (interface IDisposable) 
-            //whenever the 'using' block exits
+           
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                //Open connection
+               
                 connection.Open();
-
-                //List all Facilitys in the database
                 ListAllFacilitys(connection);
-
-                //Create a new Facility with primary key equal to current max primary key plus 1
                 Facility newFacility = new Facility()
                 {
                     Facility_No = GetMaxFacilityNo(connection) + 1,
                     Name = "New Facility"
                 };
 
-                //Insert the Facility into the database
                 InsertFacility(connection, newFacility);
-
-                //List all Facilitys including the the newly inserted one
                 ListAllFacilitys(connection);
-
-                //Get the newly inserted Facility from the database in order to update it 
                 Facility FacilityToBeUpdated = GetFacility(connection, newFacility.Facility_No);
-
-                //Alter Name and Addess properties
                 FacilityToBeUpdated.Name += "(updated)";
-
-                //Update the Facility in the database 
                 UpdateFacility(connection, FacilityToBeUpdated);
-
-                //List all Facilitys including the updated one
                 ListAllFacilitys(connection);
 
-                //Get the updated Facility in order to delete it
                 Facility FacilityToBeDeleted = GetFacility(connection, FacilityToBeUpdated.Facility_No);
-
-                //Delete the Facility
                 DeleteFacility(connection, FacilityToBeDeleted.Facility_No);
-
-                //List all Facilitys - now without the deleted one
                 ListAllFacilitys(connection);
             }
         }

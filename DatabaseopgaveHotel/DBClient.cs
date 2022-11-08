@@ -14,7 +14,7 @@ namespace DatabaseopgaveHotel
         #region Hotel
         private int GetMaxHotelNo(SqlConnection connection)
         {
-            Console.WriteLine("Calling -> GetMaxHotelNo")
+            Console.WriteLine("Calling -> GetMaxHotelNo");
             string queryStringMaxHotelNo = "SELECT  MAX(Hotel_No)  FROM DemoHotel";
             Console.WriteLine($"SQL applied: {queryStringMaxHotelNo}");
 
@@ -210,8 +210,6 @@ namespace DatabaseopgaveHotel
         private int GetMaxFacilityNo(SqlConnection connection)
         {
             Console.WriteLine("Calling -> GetMaxFacilityNo");
-
-            
             string queryStringMaxFacilityNo = "SELECT  MAX(Facility_No)  FROM DemoFacility";
             Console.WriteLine($"SQL applied: {queryStringMaxFacilityNo}");
 
@@ -385,15 +383,13 @@ namespace DatabaseopgaveHotel
 
             reader.Close();
             Console.WriteLine();
-
            
             return Facility;
         }
         public void StartFacility()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-             
+            { 
                 connection.Open();
 
                 ListAllFacilitys(connection);

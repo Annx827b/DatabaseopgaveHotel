@@ -9,7 +9,6 @@ namespace DatabaseopgaveHotel
 {
     public class Facility
     {
-        [Key]
         public int Facility_No { get; set; }
         public string Name { get; set; }
       

@@ -18,7 +18,7 @@ namespace DatabaseopgaveHotel
 
         public override string ToString()
         {
-            return $"ID: {Facility_No}, ID: {Hotel_No}";
+            return $"Facility No: {Facility_No}, Hotel No: {Hotel_No}";
         }
     }
 }

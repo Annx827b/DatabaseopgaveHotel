@@ -9,10 +9,8 @@ namespace DatabaseopgaveHotel
 {
     public class Hotel
     {
-        [Key]
         public int Hotel_No { get; set; }
         public string Name { get; set; }
-
         public string Address { get; set; }
 
         public override string ToString()

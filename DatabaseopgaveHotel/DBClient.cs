@@ -9,7 +9,7 @@ namespace DatabaseopgaveHotel
 {
     class DBClient
     {
-        string connectionString = "@Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Databaseopgave;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Databaseopgave;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
        
         #region Hotel
         private int GetMaxHotelNo(SqlConnection connection)
@@ -451,7 +451,7 @@ namespace DatabaseopgaveHotel
             Console.WriteLine("Calling -> DeleteHotelFacility");
 
 
-            string deleteCommandString = $"DELETE FROM DemoHotelFacility  WHERE Facility_No = {Facility_no} AND Hotel_No = {Hotel_No}";
+            string deleteCommandString = $"DELETE FROM DemoHotelFacility  WHERE Facility_No = {Facility_No} AND Hotel_No = {Hotel_No}";
             Console.WriteLine($"SQL applied: {deleteCommandString}");
 
 
@@ -614,10 +614,6 @@ namespace DatabaseopgaveHotel
                 HotelFacility HotelFacilityToBeUpdated = GetHotelFacility(connection, GetMaxHotelFacilityNo(connection), GetMaxHotelFacilityNo(connection));
                 HotelFacilityToBeUpdated.Hotel_No += +1;
                 UpdateHotelFacility(connection, HotelFacilityToBeUpdated);
-
-                ListAllHotelFacilitys(connection);
-                HotelFacility HotelFacilityToBeDeleted = GetHotelFacility(connection, HotelFacilityToBeUpdated.Facility_No, HotelFacilityToBeUpdated.Hotel_No);
-                DeleteHotelFacility(connection, HotelFacilityToBeDeleted.Facility_No);
 
                 ListAllHotelFacilitys(connection);
             }

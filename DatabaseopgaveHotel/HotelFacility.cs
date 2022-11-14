@@ -16,9 +16,11 @@ namespace DatabaseopgaveHotel
 
         public int Hotel_No { get; set; }
 
+        public string? Type { get; set; }
+
         public override string ToString()
         {
-            return $"Facility No: {Facility_No}, Hotel No: {Hotel_No}";
+            return $"Facility No: {Facility_No}, Hotel No: {Hotel_No} - Type: {Type}";
         }
     }
 }

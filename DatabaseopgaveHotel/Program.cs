@@ -3,4 +3,4 @@
 DBClient dbc = new DBClient();
 dbc.Start();
 dbc.StartFacility();
-dbc.StartHotelFacility();
+dbc.HotelFacilityStart();

@@ -3,14 +3,13 @@ INSERT INTO DemoFacility VALUES (1,'Bordtennis');
 INSERT INTO DemoFacility VALUES (2,'Pool'); 
 INSERT INTO DemoFacility VALUES (3,'Bar'); 
 INSERT INTO DemoFacility VALUES (4,'Spa');
-CREATE TABLE [dbo].[DemoHotelFacility] (
-    [Facility_No]	INT      NOT NULL,
-    [Hotel_No]      INT      NOT NULL,
-    PRIMARY KEY CLUSTERED ([Facility_No] ASC, [Hotel_No] ASC)
-);
-INSERT INTO DemoHotelFacility VALUES (1,2); 
-INSERT INTO DemoHotelFacility VALUES (2,4); 
-INSERT INTO DemoHotelFacility VALUES (3,3); 
+INSERT INTO DemoFacility VALUES (5,'Lounge');
+INSERT INTO DemoFacility VALUES (6,'Restaurant');
+INSERT INTO DemoFacility VALUES (7,'All Inclusive');
+INSERT INTO DemoFacility VALUES (8,'Fitness');
+CREATE TABLE DemoHotelFacility(Facility_No INT NOT NULL, Hotel_No INT NOT NULL, Type VARCHAR(30) NOT NULL, FOREIGN KEY (Facility_No) REFERENCES DemoFacility (Facility_No), FOREIGN KEY (Hotel_No) REFERENCES DemoHotel (Hotel_No), Primary KEY (Facility_No, Hotel_No));
+INSERT INTO DemoHotelFacility VALUES (1,2,'Family'); 
+INSERT INTO DemoHotelFacility VALUES (2,4, 'Adults Only');  
 CREATE TABLE DemoHotel( Hotel_No int NOT NULL PRIMARY KEY, Name VARCHAR(30) NOT NULL, Address VARCHAR(50) NOT NULL ); 
 CREATE TABLE DemoRoom( Room_No int NOT NULL, Hotel_No int NOT NULL, Types CHAR(1) DEFAULT 'S', Price FLOAT, CONSTRAINT checkType CHECK (Types IN ('D','F','S') OR Types IS NULL), CONSTRAINT checkPrice CHECK (price BETWEEN 0 AND 9999), FOREIGN KEY (Hotel_No) REFERENCES DemoHotel (Hotel_No) ON UPDATE CASCADE ON DELETE NO ACTION, Primary KEY (Room_No, Hotel_No) ); 
 CREATE TABLE DemoGuest ( Guest_No int NOT NULL PRIMARY KEY, Name VARCHAR(30) NOT NULL, Address VARCHAR(50) NOT NULL ); 

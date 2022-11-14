@@ -9,7 +9,7 @@ namespace DatabaseopgaveHotel
 {
     class DBClient
     {
-        string connectionString = @"Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MyHotel;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = "@Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Databaseopgave;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
        
         #region Hotel
         private int GetMaxHotelNo(SqlConnection connection)
@@ -617,7 +617,7 @@ namespace DatabaseopgaveHotel
 
                 ListAllHotelFacilitys(connection);
                 HotelFacility HotelFacilityToBeDeleted = GetHotelFacility(connection, HotelFacilityToBeUpdated.Facility_No, HotelFacilityToBeUpdated.Hotel_No);
-                DeleteFacility(connection, HotelFacilityToBeDeleted.Facility_No);
+                DeleteHotelFacility(connection, HotelFacilityToBeDeleted.Facility_No);
 
                 ListAllHotelFacilitys(connection);
             }
